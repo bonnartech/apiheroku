@@ -17,11 +17,11 @@ app.add_middleware(
 )
 
 class model_input(BaseModel):
+    Rainfall: float
     Max-Temprature : float
     Min-temperature : float
     Relative humidity 1(0800hrs): float
     Relative humidity 2(1400hrs): float
-    Rainfall: float
     mosquito population: int
     Cases: int
 
@@ -33,15 +33,15 @@ def malaria_pred(input_parameters: model_input):
     input_data = input_parameters.json()
     input_dictionary=json.loads(input_data)
 
+    rain = input_dictionary['Rainfall']
     maxt = input_dictionary['Max-Temperature']
     mint = input_dictionary['Min-temperature']
     rel1 = input_dictionary['Relative humidity 1(0800hrs)']
     rel2 = input_dictionary['Relative humidity 2(1400hr)']
-    rain = input_dictionary['Rainfall']
     mosqp = input_dictionary['Mosquito population']
     cas = input_dictionary['Cases']
 
-input_list = [maxt,mint,rel1,rel2,rain,mosqp,cas]
+input_list = [rain,maxt,mint,rel1,rel2,mosqp,cas]
 
 
 if prediction[0]==1:
